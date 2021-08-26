@@ -8,11 +8,15 @@ def translate(word):
     word = word.lower()
     if word in data:
         return data[word]
+    elif word.lower() in data:
+        return data[word.lower()]
+    elif word.upper() in data:
+        return data[word.upper()]
     elif len(get_close_matches(word, data.keys())) > 0:
         most_related = get_close_matches(word, data.keys())[0]
         user_res = input("Did you mean %s instead? (y/n): " % most_related)
 
-        if user_res.lower() == "y":
+        if user_res == "y":
             return data[most_related]
         else:
             return "Word not found"
